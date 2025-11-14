@@ -419,27 +419,28 @@ const Footer = () => {
                   <LocationOnIcon fontSize="small" />
                 </ContactIcon>
                 <span>
-                  Av. Innovación 123, Tech Park<br />
-                  Ciudad Tecnológica, CT 12345
+                Carlos Silva Vildósola 509, San Joaquín,
+                <br />
+                Región Metropolitana, Chile
                 </span>
               </div>
               <div>
                 <ContactIcon>
                   <PhoneIcon fontSize="small" />
                 </ContactIcon>
-                <span>+1 (555) 123-4567</span>
+                <span>+56 (9) 76025923</span>
               </div>
               <div>
                 <ContactIcon>
                   <EmailIcon fontSize="small" />
                 </ContactIcon>
-                <span>info@interferencia-constructiva.com</span>
+                <span>contacto.drmaquina@gmail.com</span>
               </div>
               <div>
                 <ContactIcon>
                   <AccessTimeIcon fontSize="small" />
                 </ContactIcon>
-                <span>Lun - Vie: 9:00 - 18:00</span>
+                <span>Lun - Vie: 9:00 - 17:00</span>
               </div>
             </ContactInfo>
           </Grid>
@@ -483,15 +484,6 @@ const Footer = () => {
               order: { xs: 1, sm: 2 }
             }}
           >
-            <BottomLink href="#" variant="body2">
-              Política de Privacidad
-            </BottomLink>
-            <BottomLink href="#" variant="body2">
-              Términos de Servicio
-            </BottomLink>
-            <BottomLink href="#" variant="body2">
-              Cookies
-            </BottomLink>
           </Box>
         </Box>
       </Container>

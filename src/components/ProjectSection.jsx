@@ -97,7 +97,7 @@ const BlueprintGrid = styled(Box)(({ theme }) => ({
   pointerEvents: 'none',
 }));
 
-// ==================== COMPONENTES DE GALERÍA MEJORADOS ====================
+// ==================== COMPONENTES DE GALERÍA CORREGIDOS ====================
 const GalleryContainer = styled(Box)(({ theme }) => ({
   position: 'relative',
   width: '100%',
@@ -107,24 +107,6 @@ const GalleryContainer = styled(Box)(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-}));
-
-const GalleryImage = styled(Box)(({ theme, imageurl, active }) => ({
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: '400px',
-  height: '400px',
-  background: imageurl 
-    ? `url(${imageurl}) center/contain no-repeat`
-    : `linear-gradient(135deg, ${COLORS.primary} 0%, ${COLORS.primaryDark} 100%)`,
-  opacity: active ? 1 : 0,
-  transition: 'opacity 0.5s ease-in-out',
-  display: 'flex',
-  alignItems: 'flex-end',
-  justifyContent: 'center',
-  padding: theme.spacing(3),
 }));
 
 const ImageDescription = styled(Box)(({ theme }) => ({
@@ -167,19 +149,6 @@ const GalleryDots = styled(Box)(({ theme }) => ({
   display: 'flex',
   gap: theme.spacing(1),
   zIndex: 5,
-}));
-
-const GalleryDot = styled(Box)(({ theme, active }) => ({
-  width: '12px',
-  height: '12px',
-  borderRadius: '50%',
-  backgroundColor: active ? COLORS.primary : 'rgba(255, 255, 255, 0.5)',
-  cursor: 'pointer',
-  transition: 'all 0.3s ease',
-  '&:hover': {
-    backgroundColor: active ? COLORS.primaryDark : 'rgba(255, 255, 255, 0.8)',
-    transform: 'scale(1.2)',
-  },
 }));
 
 // ==================== PROJECT DATA ====================
@@ -303,10 +272,25 @@ const ImageGallery = ({ images }) => {
   return (
     <GalleryContainer>
       {images.map((image, index) => (
-        <GalleryImage
+        <Box
           key={index}
-          imageurl={image.image}
-          active={index === currentImageIndex}
+          sx={{
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            width: '400px',
+            height: '400px',
+            background: image.image 
+              ? `url(${image.image}) center/contain no-repeat`
+              : `linear-gradient(135deg, ${COLORS.primary} 0%, ${COLORS.primaryDark} 100%)`,
+            opacity: index === currentImageIndex ? 1 : 0,
+            transition: 'opacity 0.5s ease-in-out',
+            display: 'flex',
+            alignItems: 'flex-end',
+            justifyContent: 'center',
+            padding: 3,
+          }}
         >
           <ImageDescription>
             <Typography variant="h6" sx={{ fontWeight: 600, mb: 1 }}>
@@ -316,7 +300,7 @@ const ImageGallery = ({ images }) => {
               {index + 1} / {images.length}
             </Typography>
           </ImageDescription>
-        </GalleryImage>
+        </Box>
       ))}
       
       {images.length > 1 && (
@@ -331,9 +315,20 @@ const ImageGallery = ({ images }) => {
           
           <GalleryDots>
             {images.map((_, index) => (
-              <GalleryDot
+              <Box
                 key={index}
-                active={index === currentImageIndex}
+                sx={{
+                  width: '12px',
+                  height: '12px',
+                  borderRadius: '50%',
+                  backgroundColor: index === currentImageIndex ? COLORS.primary : 'rgba(255, 255, 255, 0.5)',
+                  cursor: 'pointer',
+                  transition: 'all 0.3s ease',
+                  '&:hover': {
+                    backgroundColor: index === currentImageIndex ? COLORS.primaryDark : 'rgba(255, 255, 255, 0.8)',
+                    transform: 'scale(1.2)',
+                  },
+                }}
                 onClick={() => goToImage(index)}
               />
             ))}
@@ -776,7 +771,7 @@ const ProjectSection = () => {
                 transform: 'translateY(-8px)',
               },
             }}>
-              {/* IMAGEN CUADRADA - 300x300px */}
+              {/* IMAGEN CUADRADA - 300x300px SIN FILTRO NI ICONO */}
               <Box sx={{
                 width: '100%',
                 height: '300px',
@@ -785,31 +780,9 @@ const ProjectSection = () => {
                   : `linear-gradient(135deg, ${COLORS.primary} 0%, ${COLORS.primaryDark} 100%)`,
                 position: 'relative',
                 overflow: 'hidden',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
                 flexShrink: 0,
                 border: 'none',
-              }}>
-                <Box sx={{
-                  fontSize: '3rem',
-                  color: 'rgba(255, 255, 255, 0.95)',
-                  zIndex: 2,
-                  position: 'relative',
-                  filter: 'drop-shadow(0 4px 8px rgba(0,0,0,0.3))',
-                }}>
-                  {project.icon}
-                </Box>
-                {/* Overlay de gradiente */}
-                <Box sx={{
-                  position: 'absolute',
-                  top: 0,
-                  left: 0,
-                  right: 0,
-                  bottom: 0,
-                  background: `linear-gradient(135deg, ${alpha(COLORS.primary, 0.4)} 0%, ${alpha(COLORS.primaryDark, 0.6)} 100%)`,
-                }} />
-              </Box>
+              }} />
               
               <Box sx={{
                 flex: 1,
